@@ -1,0 +1,99 @@
+{
+	"dependencies": {
+		"@ant-design/plots": "^1.2.5",
+		"@atlaskit/icon": "^21.12.4",
+		"@date-io/core": "^2.10.7",
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.8.1",
+		"@ethersproject/bytes": "^5.0.11",
+		"@iconify-icons/el": "^1.1.0",
+		"@iconify-icons/mdi": "^1.1.1",
+		"@iconify-icons/twemoji": "^1.1.0",
+		"@iconify/react": "^1.1.3",
+		"@material-ui/core": "^4.11.3",
+		"@material-ui/icons": "^4.11.2",
+		"@material-ui/lab": "^4.0.0-alpha.60",
+		"@material-ui/pickers": "^3.3.10",
+		"@mui/icons-material": "^5.5.1",
+		"@mui/material": "^5.0.2",
+		"@mui/styles": "^5.5.1",
+		"@mui/x-date-pickers": "^5.0.0-beta.2",
+		"@reduxjs/toolkit": "^1.6.1",
+		"@types/axios": "^0.14.0",
+		"@types/c3": "^0.7.5",
+		"@types/cron": "^1.7.2",
+		"@types/d3": "^6.2.0",
+		"@types/lodash": "^4.14.168",
+		"@types/moment": "^2.13.0",
+		"@types/node": "^12.12.3",
+		"@types/react": "^16.9.11",
+		"@types/react-dom": "^16.9.3",
+		"@types/react-redux": "^7.1.18",
+		"@types/react-router-dom": "^5.1.1",
+		"@types/react-slick": "^0.23.4",
+		"@types/sprintf-js": "^1.1.2",
+		"@types/store": "^2.0.2",
+		"@types/styled-components": "^5.1.9",
+		"@vvo/tzdb": "^6.79.0",
+		"connected-react-router": "^6.9.1",
+		"cron": "^1.8.2",
+		"eslint-config-react": "^1.1.7",
+		"ethers": "^5.4.7",
+		"http-status-codes": "^2.1.4",
+		"jest": "26.6.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-dropzone": "^11.3.4",
+		"react-router-dom": "^6.16.0",
+		"react-scripts": "^4.0.3",
+		"react-toastify": "^8.2.0",
+		"replace-string": "^3.1.0",
+		"sprintf-js": "^1.1.2",
+		"string": "^3.3.3",
+		"styled-components": "^5.2.1",
+		"typeface-roboto": "0.0.75",
+		"typescript": "^4.2.3",
+		"validator": "^13.5.2",
+		"web3-utils": "^1.3.5"
+	},
+	"scripts": {
+		"dev": "react-scripts start",
+		"analyze": "source-map-explorer 'build/static/js/*.js'",
+		"start": "BROWSER='google-chrome-stable' react-scripts start",
+		"start-win": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts jest",
+		"eject": "react-scripts eject"
+	},
+	"jest": {
+		"modulePathIgnorePatterns": [
+			"/node_modules/"
+		]
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@types/react-beautiful-dnd": "^13.1.2",
+		"@types/react-draft-wysiwyg": "^1.13.4",
+		"@types/validator": "^13.1.3",
+		"@typescript-eslint/parser": "^4.19.0",
+		"eslint-config-prettier": "^6.5.0",
+		"eslint-plugin-prettier": "^3.1.1",
+		"eslint-plugin-react": "^7.16.0",
+		"prettier": "^1.18.2",
+		"ts-node": "^9.1.1"
+	}
+}

@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./src/_types"
+    ],
+    "noFallthroughCasesInSwitch": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+    }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules/@nivo/line/index.d.ts"
+  ],
+  "watchOptions": {
+    "watchFile": "dynamicPriorityPolling",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": [
+      "**/node_modules",
+      "dist",
+      "dist_test"
+    ]
+  }
+}
