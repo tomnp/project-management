@@ -1,6 +1,3 @@
-import PCard from 'components/Card'
-import Divider from 'components/Divider'
-import PSearch from 'components/SearchBox'
 import React from 'react'
 import styled from 'styled-components'
 import Products from './Products'
@@ -8,19 +5,10 @@ import Products from './Products'
 const Home: React.FC = () => {
 	return (
 		<Container>
-			<PCard>
-				<PSearch />
-				<StyledDivider>Product List</StyledDivider>
-				<Products />
-			</PCard>
+			<Products />
 		</Container>
 	)
 }
-
-const StyledDivider = styled(Divider)`
-	margin-top: 32px;
-	margin-bottom: 24px;
-`
 
 const Container = styled.div`
 	display: flex;

@@ -5,3 +5,17 @@
 body {
     margin: 0;
 }
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F8F8F9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D9E0E8;
+    border-radius: 4px;
+}
