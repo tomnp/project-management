@@ -4,11 +4,11 @@ import { GetProductsApiResponse, Product } from 'types/product.type'
 import ProductCard from './ProductCard'
 import { useQuery } from 'react-query'
 import LoadingSkelection from 'components/LoadingSkelecton'
-import PSearch from 'components/SearchBox'
+import SearchBox from 'components/SearchBox'
 import Divider from 'components/Divider'
 import { debounce } from 'lodash'
 import { create } from 'zustand'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import PCard from 'components/Card'
 import { groupBy, upperFirstLetter } from 'utils'
 
@@ -45,9 +45,26 @@ const useProductStore = create<ProductsStoreType>(set => ({
 const Products: React.FC = () => {
 	const { text, products, setSearchText, updateProductTitleById, setProducts } = useProductStore(state => state)
 	const { isLoading, data } = useQuery(`search?q=${text}&select=title,price,category,thumbnail&limit=100`)
-	useEffect(() => {
-		setProducts((data as GetProductsApiResponse)?.products ?? [])
-	}, [data])
+
+	const [groupContent, setProductContent] = useState<string[]>([])
+	const [groupCounts, setGroupCounts] = useState<number[]>([])
+	const [groupIndex, setGroupIndex] = useState<number[][]>([])
+
+	const sortedProducts = useMemo(
+		() =>
+			products.sort((a, b) => {
+				if (a.category[0] < b.category[0]) {
+					return -1
+				}
+
+				if (a.category[0] > b.category[0]) {
+					return 1
+				}
+
+				return 0
+			}),
+		[products],
+	)
 
 	const handleOnSearching = debounce(
 		useCallback((text: string) => {
@@ -56,23 +73,47 @@ const Products: React.FC = () => {
 		300,
 	)
 
-	const productsMapper: ProductsMapperType = groupBy(products, 'category')
+	useEffect(() => {
+		const productsMapper: ProductsMapperType = groupBy(sortedProducts, 'category')
+		const parsedGroupCounts: number[] = []
+		const parsedGroupIndex: number[][] = []
+
+		Object.values(productsMapper).forEach((items, batchIndex) => {
+			parsedGroupCounts.push(items.length)
+			parsedGroupIndex.push(items.map((_, index) => index + batchIndex * items.length))
+		})
+
+		setGroupCounts(parsedGroupCounts)
+		setGroupIndex(parsedGroupIndex)
+		setProductContent(Object.keys(productsMapper).map(key => upperFirstLetter(key)))
+	}, [sortedProducts])
+
+	useEffect(() => {
+		setProducts((data as GetProductsApiResponse)?.products ?? [])
+	}, [data])
 
 	return (
 		<StyledPCard>
-			<PSearch onSearching={handleOnSearching} />
-			<StyledDivider>Product List</StyledDivider>
+			<SearchBox onSearching={handleOnSearching} />
+			<StyledDivider>
+				<h2>Product List</h2>
+			</StyledDivider>
 			<ProductContainer>
 				{isLoading ? (
 					<LoadingSkelection amount={5} />
 				) : (
-					Object.keys(productsMapper).map((key, index) => (
-						<NestedList header={upperFirstLetter(key)} key={index} open={index === 0}>
-							{productsMapper[key].map((product, productItemKey) => (
-								<ProductCard item={product} key={productItemKey} onChanged={value => updateProductTitleById(product.id, value)} />
-							))}
-						</NestedList>
-					))
+					<NestedList
+						groupIndex={groupIndex}
+						groupCounts={groupCounts}
+						groupContent={groupContent}
+						itemContent={index => (
+							<ProductCard
+								item={sortedProducts[index]}
+								key={index}
+								onChanged={value => updateProductTitleById(sortedProducts[index].id, value)}
+							/>
+						)}
+					/>
 				)}
 			</ProductContainer>
 		</StyledPCard>

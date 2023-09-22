@@ -19,3 +19,25 @@ body {
     background: #D9E0E8;
     border-radius: 4px;
 }
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    color: #353c49;
+    font-weight: 600;
+    font-style: normal;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+}

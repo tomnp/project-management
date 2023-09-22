@@ -16294,6 +16294,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-virtuoso@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "react-virtuoso@npm:4.6.0"
+  peerDependencies:
+    react: ">=16 || >=17 || >= 18"
+    react-dom: ">=16 || >=17 || >= 18"
+  checksum: 9bf788e8d17ae6de7883b96173d5a8a3cf753e647b720487a39bbf65ab517e61f72b83ab45ba3467cb4d9dd0426cc89d382c5675828b1bf70c3179c0be4c1d1e
+  languageName: node
+  linkType: hard
+
 "react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
@@ -17036,6 +17046,7 @@ resolve@^2.0.0-next.3:
     react-router-dom: ^6.16.0
     react-scripts: ^4.0.3
     react-toastify: ^8.2.0
+    react-virtuoso: ^4.6.0
     replace-string: ^3.1.0
     sprintf-js: ^1.1.2
     string: ^3.3.3

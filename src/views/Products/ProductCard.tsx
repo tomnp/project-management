@@ -1,4 +1,7 @@
+import Currency from 'components/Currency'
 import TextField from 'components/TextField'
+import useKeyboard from 'hooks/useKeyboard'
+import { random } from 'lodash'
 import { HTMLAttributes, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Product } from 'types/product.type'
@@ -17,15 +20,22 @@ const ProductCard: React.FC<ProductCardProps & HTMLAttributes<HTMLDivElement>> =
 	})
 
 	useEffect(() => {
-		if (updating) {
-			inputRef.current?.focus()
+		if (updating && inputRef.current) {
+			inputRef.current.focus()
 		}
 	}, [updating])
 
+	useKeyboard('Enter', () => {
+		const onEditing = inputRef.current && document.activeElement === inputRef.current
+		if (onEditing) {
+			inputRef.current.blur()
+		}
+	})
+
 	return (
 		<Container {...rest}>
-			<ProductThumb $src={item.thumbnail ?? ''} />
-			<ProductContent>
+			<Thumbnail $src={item.thumbnail ?? ''} />
+			<Content>
 				{updating ? (
 					<StyledTextField ref={inputRef} value={item.title} onChanged={onChanged} onBlur={() => setUpdating(false)} />
 				) : (
@@ -38,32 +48,22 @@ const ProductCard: React.FC<ProductCardProps & HTMLAttributes<HTMLDivElement>> =
 						{item.title}
 					</Title>
 				)}
-				<Price>$ {formatter.format(item.price ?? 0)}</Price>
-			</ProductContent>
+				<Currency>$ {formatter.format(item.price ?? 0)}</Currency>
+			</Content>
 		</Container>
 	)
 }
 
 const StyledTextField = styled(TextField)`
 	width: calc(100% - 24px);
+	border: 1px solid transparent;
 `
 
-const Price = styled.div`
-	padding: 0px 8px;
-	color: #676e7b;
-
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: 18px;
-`
-
-const Title = styled.div`
+const Title = styled.h4`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
 	padding: 6px 8px;
-	height: 20px;
 	align-items: center;
 	gap: 10px;
 	align-self: stretch;
@@ -71,11 +71,7 @@ const Title = styled.div`
 	border: 1px solid transparent;
 
 	overflow: hidden;
-	color: #353c49;
 	text-overflow: ellipsis;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: 600;
 
 	cursor: pointer;
 
@@ -92,7 +88,7 @@ const Title = styled.div`
 	}
 `
 
-const ProductContent = styled.div`
+const Content = styled.div`
 	display: flex;
 	align-self: center;
 	flex-direction: column;
@@ -103,7 +99,7 @@ const ProductContent = styled.div`
 	max-width: calc(100% - 100px);
 `
 
-const ProductThumb = styled.div<{ $src: string }>`
+const Thumbnail = styled.div<{ $src: string }>`
 	height: 72px;
 	width: 72px;
 	min-width: 72px;
@@ -112,6 +108,7 @@ const ProductThumb = styled.div<{ $src: string }>`
 	background-image: ${({ $src }) => `url(${$src})`};
 	background-size: cover;
 	background-position-y: center;
+	background-position-x: center;
 	background-repeat: no-repeat, repeat;
 `
 

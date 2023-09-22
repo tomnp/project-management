@@ -1,12 +1,12 @@
-import { Button } from '@mui/base/Button'
+import { Button as MUIButton } from '@mui/base/Button'
 import { HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-const PButton: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...rest }) => {
+const Button: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...rest }) => {
 	return <StyledButton {...rest}>{children}</StyledButton>
 }
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(MUIButton)`
 	padding: 12px 16px;
 	align-items: flex-start;
 	gap: 10px;
@@ -17,4 +17,4 @@ const StyledButton = styled(Button)`
 	cursor: pointer;
 `
 
-export default PButton
+export default Button

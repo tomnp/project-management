@@ -7,7 +7,3 @@ export const Icons = {
 	CloseIcon,
 	ChevronIcon,
 }
-
-export const getIcon = (iconName: keyof typeof Icons) => {
-	return Icons[iconName]
-}

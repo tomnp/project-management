@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import { Icons } from 'assets/svgs'
 import styled, { css } from 'styled-components'
-import PButton from './Button'
+import Button from './Button'
 import { create } from 'zustand'
 
 type SearchStoreType = {
@@ -13,10 +13,10 @@ const useSearchStore = create<SearchStoreType>(set => ({
 	setSearchText: (value: string) => set({ text: value }),
 }))
 
-interface PSearchProps {
+interface SearchBoxProps {
 	onSearching: (text: string) => void
 }
-const PSearch: React.FC<PSearchProps> = ({ onSearching }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ onSearching }) => {
 	const { text, setSearchText } = useSearchStore(state => state)
 	const searching = text.length > 0
 
@@ -33,14 +33,15 @@ const PSearch: React.FC<PSearchProps> = ({ onSearching }) => {
 
 	return (
 		<Container>
-			<Search $searching={searching}>
+			<SearchBar $searching={searching}>
 				<Icons.SearchIcon />
 				<StyledInputBase variant="outlined" placeholder="Search" value={text} onChange={handleOnInputChanged} />
 				<StyledClearIcon tabIndex={0} onClick={handleOnClear} $show={searching}>
 					<Icons.CloseIcon />
 				</StyledClearIcon>
-			</Search>
-			<CancelButton
+			</SearchBar>
+
+			<StyledButton
 				onClick={e => {
 					if (!searching) {
 						e.preventDefault()
@@ -52,12 +53,12 @@ const PSearch: React.FC<PSearchProps> = ({ onSearching }) => {
 				$disabled={searching}
 			>
 				Cancel
-			</CancelButton>
+			</StyledButton>
 		</Container>
 	)
 }
 
-const CancelButton = styled(PButton)<{ $disabled: boolean }>`
+const StyledButton = styled(Button)<{ $disabled: boolean }>`
 	font-size: 14px;
 	font-weight: 400;
 	background-color: transparent;
@@ -89,7 +90,7 @@ const Container = styled.div`
 	gap: 8px;
 `
 
-const Search = styled.div<{ $searching: boolean }>`
+const SearchBar = styled.div<{ $searching: boolean }>`
 	display: inline-flex;
 	border-radius: 50px;
 	border: 1px solid #d9e0e8;
@@ -165,4 +166,4 @@ const StyledInputBase = styled(TextField)`
 	}
 `
 
-export default PSearch
+export default SearchBox
