@@ -1,7 +1,6 @@
 import Currency from 'components/Currency'
 import TextField from 'components/TextField'
 import useKeyboard from 'hooks/useKeyboard'
-import { random } from 'lodash'
 import { HTMLAttributes, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Product } from 'types/product.type'
